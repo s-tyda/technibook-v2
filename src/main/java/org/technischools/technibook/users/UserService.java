@@ -1,28 +1,30 @@
 package org.technischools.technibook.users;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.technischools.technibook.users.api.SaveUserRequest;
+import org.technischools.technibook.users.api.CreateUserRequest;
 
 import java.util.Date;
 import java.util.UUID;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class UserService {
     private final UserRepository userRepository;
 
-    public User getUserByUuid(String uuid){
-        return userRepository.findByUuid(uuid);
-    }
-
-    public void saveUser(SaveUserRequest saveUserRequest){
-        User user = User.builder()
+    public User createUser(CreateUserRequest createUserRequest) {
+        User newUser = User.builder()
                 .uuid(UUID.randomUUID().toString())
                 .createdDate(new Date())
-                .email(saveUserRequest.getEmail())
-                .password(saveUserRequest.getPassword())
+                .email(createUserRequest.getEmail())
+                .password(createUserRequest.getPassword())
                 .build();
-        userRepository.save(user);
+        User createdUser = userRepository.save(newUser);
+        return createdUser;
+    }
+
+    public User getUser(String uuid) {
+        return userRepository.findByUuid(uuid);
     }
 }

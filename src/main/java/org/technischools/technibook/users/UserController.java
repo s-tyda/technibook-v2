@@ -1,24 +1,22 @@
 package org.technischools.technibook.users;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.technischools.technibook.users.api.SaveUserRequest;
+import org.technischools.technibook.users.api.CreateUserRequest;
 
-@RestController
 @RequiredArgsConstructor
+@RestController
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/{uuid}")
-    public User getUserByUuid(@PathVariable("uuid") String uuid){
-        return userService.getUserByUuid(uuid);
+    @PostMapping("")
+    public User createUser(@RequestBody CreateUserRequest createUserRequest){
+        return userService.createUser(createUserRequest);
     }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void createUser(@RequestBody SaveUserRequest saveUserRequest){
-        userService.saveUser(saveUserRequest);
+    @GetMapping("/{uuid}")
+    public User getUser(@PathVariable("uuid") String uuid){
+        return userService.getUser(uuid);
     }
 }
