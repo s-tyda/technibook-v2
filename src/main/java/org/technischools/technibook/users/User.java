@@ -19,5 +19,6 @@ public class User {
     private String uuid;
     private String email;
     private String password;
+    private boolean activated;
     private List<String> roles;
 }
