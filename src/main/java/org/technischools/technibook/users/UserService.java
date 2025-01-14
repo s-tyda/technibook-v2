@@ -2,6 +2,7 @@ package org.technischools.technibook.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.technischools.technibook.users.api.CreateUserRequest;
 
